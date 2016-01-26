@@ -326,6 +326,18 @@ You can circumvent that by setting ``$bEnforceMapType`` to ``false``:
     $jm->bEnforceMapType = false;
     $jm->map(...);
 
+Remove some unwanted characters from json's parameter name
+---------------------------
+
+Sometimes you have strange characters in json and you want to remove them
+before start mapping.
+You can just set ignoreList in JsonMapper.
+
+.. code:: php
+
+    $jm = new JsonMapper();
+    $jm->setIgnoreList(['@']);
+    $jm->map(...);
 
 ============
 Installation
