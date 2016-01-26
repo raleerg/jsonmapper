@@ -66,6 +66,14 @@ class JsonMapper
     protected $arInspectedClasses = array();
 
     /**
+     * List of the characters to be removed and ignored from the json parameters
+     * name.
+     *
+     * @var array
+     */
+    protected $ignoreList = array();
+
+    /**
      * Map data all data in $json into the given $object instance.
      *
      * @param object $json   JSON object structure from json_decode()
@@ -95,6 +103,16 @@ class JsonMapper
         $providedProperties = array();
         foreach ($json as $key => $jvalue) {
             $providedProperties[$key] = true;
+
+            // Check if IgnoreList exists and if does check $key and remove
+            // any char listed inside the list.
+            if(!empty($this->ignoreList)){
+                foreach($this->ignoreList as $char){
+                    if(strpos($key, $char) !== false){
+                        $key = str_replace($char, '', $key);
+                    }
+                }
+            }
 
             // Store the property inspection results so we don't have to do it
             // again for subsequent objects of the same type
@@ -555,6 +573,17 @@ class JsonMapper
     public function setLogger($logger)
     {
         $this->logger = $logger;
+    }
+
+    /**
+     * Sets a IgnoreList
+     *
+     * @param array $list
+     *
+     */
+    public function setIgnoreList(array $list)
+    {
+        $this->ignoreList = $list;
     }
 }
 ?>
