@@ -14,7 +14,7 @@
         }
     ],
     "support": {
-        "email": "marko.raskovic@tajawal.com",
+        "email": "marko.raskovic@tajawal.com"
     },
     "require-dev": {
         "phpunit/phpunit": "4.2.*",
